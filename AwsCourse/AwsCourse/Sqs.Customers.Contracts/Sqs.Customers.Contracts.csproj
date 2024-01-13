@@ -6,9 +6,4 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
-    <ItemGroup>
-      <PackageReference Include="AWSSDK.SQS" Version="3.7.300.35" />
-      <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.1" />
-    </ItemGroup>
-
 </Project>

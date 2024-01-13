@@ -1,8 +1,8 @@
-﻿namespace Sqs.Api.Publisher.Lib.Domain;
+﻿namespace Sqs.Customers.Contracts.Contracts.Messages;
 
-public class Customer
+public class CustomerCreated
 {
-    public required Guid Id { get; init; } = Guid.NewGuid();
+    public required Guid Id { get; init; }
 
     public required string GitHubUsername { get; init; }
 

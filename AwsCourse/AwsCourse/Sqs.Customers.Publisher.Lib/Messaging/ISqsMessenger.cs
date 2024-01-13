@@ -1,6 +1,6 @@
 ﻿using Amazon.SQS.Model;
 
-namespace Sqs.Api.Publisher.Lib.Messaging;
+namespace Sqs.Customers.Publisher.Lib.Messaging;
 
 public interface ISqsMessenger
 {

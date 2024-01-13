@@ -1,4 +1,4 @@
-﻿namespace Sqs.Api.Publisher.Lib.Messaging;
+﻿namespace Sqs.Customers.Consumer.Messaging.Settings;
 
 public class QueueSettings
 {

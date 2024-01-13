@@ -1,6 +1,6 @@
-﻿namespace Sqs.Api.Publisher.Lib.Contracts.Messages;
+﻿namespace Sqs.Customers.Contracts.Contracts.Messages;
 
-public class CustomerCreated
+public class CustomerUpdated
 {
     public required Guid Id { get; init; }
 

@@ -2,8 +2,9 @@
 using Amazon.SQS;
 using Amazon.SQS.Model;
 using Microsoft.Extensions.Options;
+using Sqs.Customers.Publisher.Lib.Messaging.Settings;
 
-namespace Sqs.Api.Publisher.Lib.Messaging;
+namespace Sqs.Customers.Publisher.Lib.Messaging;
 
 public class SqsMessenger : ISqsMessenger
 {
@@ -27,7 +28,7 @@ public class SqsMessenger : ISqsMessenger
             MessageBody = JsonSerializer.Serialize(message),
             MessageAttributes = new Dictionary<string, MessageAttributeValue>
             {
-                { "MessageType", new MessageAttributeValue { DataType = "String", StringValue = typeof(T).FullName } }
+                { "MessageType", new MessageAttributeValue { DataType = "String", StringValue = typeof(T).Name } }
             }
         };
 

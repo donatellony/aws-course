@@ -1,7 +1,7 @@
-﻿using Sqs.Api.Publisher.Lib.Contracts.Messages;
-using Sqs.Api.Publisher.Lib.Domain;
+﻿using Sqs.Customers.Contracts.Contracts.Messages;
+using Sqs.Customers.Publisher.Lib.Domain;
 
-namespace Sqs.Api.Publisher.Lib.Mapping;
+namespace Sqs.Customers.Publisher.Lib.Mapping;
 
 public static class DomainToMessageMapper
 {

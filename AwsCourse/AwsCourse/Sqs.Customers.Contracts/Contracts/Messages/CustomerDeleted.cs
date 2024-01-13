@@ -1,4 +1,4 @@
-﻿namespace Sqs.Api.Publisher.Lib.Contracts.Messages;
+﻿namespace Sqs.Customers.Contracts.Contracts.Messages;
 
 public class CustomerDeleted
 {
