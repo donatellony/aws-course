@@ -6,6 +6,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sqs", "Sqs", "{B71B5B5F-F64
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sqs.Contracts", "Sqs.Contracts\Sqs.Contracts.csproj", "{BCA8CE9C-84D8-445F-B626-F55E0B015E7E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sqs.Consumer", "Sqs.Consumer\Sqs.Consumer.csproj", "{92891341-8067-4CBE-B77E-87EFE643CAAC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,9 +22,14 @@ Global
 		{BCA8CE9C-84D8-445F-B626-F55E0B015E7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCA8CE9C-84D8-445F-B626-F55E0B015E7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCA8CE9C-84D8-445F-B626-F55E0B015E7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92891341-8067-4CBE-B77E-87EFE643CAAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92891341-8067-4CBE-B77E-87EFE643CAAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92891341-8067-4CBE-B77E-87EFE643CAAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92891341-8067-4CBE-B77E-87EFE643CAAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{AC10A578-FDDB-4075-AFD4-D229328CE5E5} = {B71B5B5F-F64E-4A5F-9584-2F4F12831A67}
 		{BCA8CE9C-84D8-445F-B626-F55E0B015E7E} = {B71B5B5F-F64E-4A5F-9584-2F4F12831A67}
+		{92891341-8067-4CBE-B77E-87EFE643CAAC} = {B71B5B5F-F64E-4A5F-9584-2F4F12831A67}
 	EndGlobalSection
 EndGlobal
