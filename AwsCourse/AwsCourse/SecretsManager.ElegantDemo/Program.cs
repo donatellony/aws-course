@@ -11,4 +11,8 @@ builder.Configuration.AddSecretsManager(configurator: options =>
     options.KeyGenerator = (_, s) => s
         .Replace($"{env}_{appName}_", string.Empty)
         .Replace("__", ";");
+    options.PollingInterval = TimeSpan.FromHours(1); // Try to refresh the configuration automatically
 });
+
+// Polling interval requires the usage of IOptionsMonitor<OuterConfigSection> instead of IOptions<OuterConfigSection>
+// Interval should not be short, as you're charged per every request to the Secrets Manager :)
