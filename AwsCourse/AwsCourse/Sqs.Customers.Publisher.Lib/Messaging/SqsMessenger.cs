@@ -36,7 +36,7 @@ public class SqsMessenger : ISqsMessenger
         return response;
     }
 
-    private async Task<string> GetQueueUrlAsync()
+    private async ValueTask<string> GetQueueUrlAsync()
     {
         return _queueUrl ??= (await _sqs.GetQueueUrlAsync(_queueSettings.Value.Name)).QueueUrl;
     }
