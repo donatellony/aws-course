@@ -25,7 +25,8 @@ public class CustomerRepository : ICustomerRepository
         var createItemRequest = new PutItemRequest
         {
             TableName = _tableName,
-            Item = attributes
+            Item = attributes,
+            ConditionExpression = "attribute_not_exists(pk) and attribute_not_exists(sk)"
         };
 
         var response = await _dynamoDb.PutItemAsync(createItemRequest);
@@ -46,22 +47,42 @@ public class CustomerRepository : ICustomerRepository
 
         var response = await _dynamoDb.GetItemAsync(getItemRequest);
 
-        return DeserializeGetItemResponse<CustomerDto>(response);
+        return DeserializeItem<CustomerDto>(response.Item);
     }
 
+    /// <summary>
+    /// SHOULD BE AVOIDED IN MOST CASES!!! Retrieves all customers from the DynamoDB table asynchronously.
+    /// </summary>
+    /// <returns>A task that represents the asynchronous operation. The task result contains a collection of CustomerDto objects.</returns>
     public async Task<IEnumerable<CustomerDto>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        var scanRequest = new ScanRequest
+        {
+            TableName = _tableName
+        };
+
+        var response = await _dynamoDb.ScanAsync(scanRequest);
+        return response
+            .Items
+            .Select(DeserializeItem<CustomerDto>)
+            .Where(item => item is not null)
+            .Select(item => item!)
+            .ToList();
     }
 
-    public async Task<bool> UpdateAsync(CustomerDto customer)
+    public async Task<bool> UpdateAsync(CustomerDto customer, DateTime requestStarted)
     {
         customer.UpdatedAt = DateTime.UtcNow;
         var attributes = MapToItem(customer);
         var updateItemRequest = new PutItemRequest
         {
             TableName = _tableName,
-            Item = attributes
+            Item = attributes,
+            ConditionExpression = "UpdatedAt < :requestStarted", // Condition to check before the update applies
+            ExpressionAttributeValues = new Dictionary<string, AttributeValue>
+            {
+                { ":requestStarted", new AttributeValue { S = requestStarted.ToString("O") } }
+            }
         };
 
         var response = await _dynamoDb.PutItemAsync(updateItemRequest);
@@ -92,17 +113,17 @@ public class CustomerRepository : ICustomerRepository
         return objectAsAttributes;
     }
 
-    private static T? DeserializeGetItemResponse<T>(GetItemResponse response) where T : class
+    private static T? DeserializeItem<T>(Dictionary<string, AttributeValue> item) where T : class
     {
-        if (response.Item.Count == 0)
+        if (item.Count == 0)
         {
             return null;
         }
 
-        var itemAsDocument = Document.FromAttributeMap(response.Item);
+        var itemAsDocument = Document.FromAttributeMap(item);
         return JsonSerializer.Deserialize<T>(itemAsDocument.ToJson());
     }
-    
+
     private static bool IsPositiveResponse(AmazonWebServiceResponse response)
     {
         return response.HttpStatusCode == HttpStatusCode.OK;
