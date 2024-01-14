@@ -7,8 +7,13 @@ namespace SimpleLambda;
 
 public class Function
 {
-    public void FunctionHandler(ILambdaContext context)
+    public void FunctionHandler(Hello request, ILambdaContext context)
     {
-        context.Logger.LogInformation("Hello from C#!");
+        context.Logger.LogInformation($"Hello from {request.World}!");
+    }
+
+    public class Hello
+    {
+        public string World { get; set; } = default!;
     }
 }
